@@ -13,6 +13,9 @@ public class Config {
     public final static String USER_GET_UPDATE_DELETE = "api/auth/user";
     public final static String USER_LOGOUT = "api/auth/logout";
 
+    public final static String ORDER_GET_INGREDIENTS = "api/ingredients";
+    public final static String ORDER_CREATE = "api/orders";
+    public final static String ORDER_GET = "api/orders";
 
     public static RequestSpecification requestSpec() {
         return new RequestSpecBuilder()

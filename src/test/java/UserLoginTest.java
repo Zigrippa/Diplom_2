@@ -1,4 +1,3 @@
-import com.github.javafaker.Faker;
 import config.Config;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
