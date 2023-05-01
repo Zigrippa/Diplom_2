@@ -9,7 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class UserCreationTest {
 
@@ -44,6 +44,8 @@ public class UserCreationTest {
             assertEquals("Статус код неверный при создании пользователя",
                     HttpStatus.SC_OK, response.extract().statusCode());
 
+            assertTrue("Невалидные данные в теле:", response.extract().path("success"));
+
         }
 
         @Test
@@ -55,6 +57,8 @@ public class UserCreationTest {
 
             assertEquals("Статус код неверный при создании уже существующего пользователя",
                     HttpStatus.SC_FORBIDDEN, response.extract().statusCode());
+
+            assertFalse("Невалидные данные в теле:", response.extract().path("success"));
 
         }
 
@@ -69,6 +73,8 @@ public class UserCreationTest {
             assertEquals("Статус код неверный при создании пользователя без заполнения почтового адреса",
                     HttpStatus.SC_FORBIDDEN, response.extract().statusCode());
 
+            assertFalse("Невалидные данные в теле:", response.extract().path("success"));
+
         }
 
         @Test
@@ -82,6 +88,8 @@ public class UserCreationTest {
             assertEquals("Статус код неверный при создании пользователя без заполнения пароля",
                     HttpStatus.SC_FORBIDDEN, response.extract().statusCode());
 
+            assertFalse("Невалидные данные в теле:", response.extract().path("success"));
+
         }
 
         @Test
@@ -94,6 +102,8 @@ public class UserCreationTest {
 
             assertEquals("Статус код неверный при создании пользователя без заполнения имени",
                     HttpStatus.SC_FORBIDDEN, response.extract().statusCode());
+
+            assertFalse("Невалидные данные в теле:", response.extract().path("success"));
 
         }
 

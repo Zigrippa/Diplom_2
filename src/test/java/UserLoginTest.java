@@ -9,7 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class UserLoginTest {
 
@@ -44,6 +44,8 @@ public class UserLoginTest {
         assertEquals("Статус код неверный при логине пользователя",
                 HttpStatus.SC_OK, response.extract().statusCode());
 
+        assertTrue("Невалидные данные в теле:", response.extract().path("success"));
+
     }
 
     @Test
@@ -55,6 +57,8 @@ public class UserLoginTest {
         assertEquals("Статус код неверный при логине пользователя с неверным почтовым адресом",
                 HttpStatus.SC_UNAUTHORIZED, response.extract().statusCode());
 
+        assertFalse("Невалидные данные в теле:", response.extract().path("success"));
+
     }
 
     @Test
@@ -65,6 +69,8 @@ public class UserLoginTest {
 
         assertEquals("Статус код неверный при логине пользователя с неверным паролем",
                 HttpStatus.SC_UNAUTHORIZED, response.extract().statusCode());
+
+        assertFalse("Невалидные данные в теле:", response.extract().path("success"));
 
     }
 

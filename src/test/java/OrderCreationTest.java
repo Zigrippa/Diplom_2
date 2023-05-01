@@ -14,13 +14,12 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class OrderCreationTest {
 
     private OrderClient orderClient;
     private Order order;
-    //String accessToken;
 
     private UserClient userClient;
     private User user;
@@ -85,6 +84,8 @@ public class OrderCreationTest {
         assertEquals("Статус код неверный при создании заказа с авторизацией",
                 HttpStatus.SC_OK, response.extract().statusCode());
 
+        assertTrue("Невалидные данные в теле:", response.extract().path("success"));
+
     }
 
     @Test
@@ -95,6 +96,8 @@ public class OrderCreationTest {
 
         assertEquals("Статус код неверный при создании заказа без авторизации",
                 HttpStatus.SC_OK, response.extract().statusCode());
+
+        assertTrue("Невалидные данные в теле:", response.extract().path("success"));
 
     }
 
@@ -107,6 +110,8 @@ public class OrderCreationTest {
 
         assertEquals("Статус код неверный при создании заказа без ингредиентов",
                 HttpStatus.SC_BAD_REQUEST, response.extract().statusCode());
+
+        assertFalse("Невалидные данные в теле:", response.extract().path("success"));
 
     }
 
